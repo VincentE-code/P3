@@ -1,36 +1,52 @@
-import random
+class Items():
 
-class Object():
-	def __init__(self, number_of_items, items):
-		self.number_of_items = number_of_items
-		self.items = items
+	def __init__(self, items):
+		self.items= {}
+		items = ["needle()", "syringue()", "plastic_tube()", "ether()"]
+		
+	def set_items(self):
+		with open('maze.txt') as maze:
+        	datas = maze.read()
+		B = 1
+		D = 1 
+		E = 1
+		F = 1
+		backpack_macgyver = 0
+		for letter in datas:
+			if letter == "B":
+				self.items[] = needle()
+			if letter == "D":
+				self.items[] = syringue()
+			if letter == "E":
+				self.items[] = plastic_tube()
+			if letter == "F":
+				self.items[] = ether()
 
-items = ["needle()", "syringue()", "plastic_tube()", "ether()"]
-number_of_items = 4		
+	def needle():
+		image_of_needle = needle.png
+		place_in_the_backpack = 1
 
-def needle():
-	image_of_needle = needle.png
-	coordinate = random in floor
-	place_in_the_backpack = 1
+	def syringue():
+		image_of_syringue = syringue.png
+		place_in_the_backpack = 1
 
-def syringue():
-	image_of_syringue = syringue.png
-	coordinate = random in floor
-	place_in_the_backpack = 1
+	def plastic_tube():
+		image_of_plastic_tube = plastic_tube.png
+		place_in_the_backpack = 1
 
-def plastic_tube():
-	image_of_plastic_tube = plastic_tube.png
-	coordinate = random in floor
-	place_in_the_backpack = 1
+	def ether():
+		image_of_ether = ether.png
+		place_in_the_backpack = 1
+		
 
-def ether():
-	image_of_ether = ether.png
-	coordinate = random in floor
-	place_in_the_backpack = 1
-	
+	def backpack_MacGyver():
+	    items_inventory = []
+	#Ajoutez un compteur qui les listera.
 
-    def backpack_MacGyver():
-    	items_inventory = [1 ,5]
-        items = ["needle()", "syringue()", "plastic_tube()", "ether()"]
-#Ajoutez un compteur qui les listera.
-        
+	if __name__ == "__main__":
+    # ici tu test ton code
+		items.needle()
+		items.syringue()
+		items.plastic_tube()
+		items.ether()
+		items.backpack_MacGyver()
