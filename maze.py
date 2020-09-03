@@ -3,6 +3,7 @@ class Maze:
     def __init__(self):
         print("object created")
         self.grid = {}
+        self.chemin = []
 
     def set_grid(self):
         with open('maze.txt') as maze:
@@ -20,7 +21,8 @@ class Maze:
                 self.grid[(x, y)] = "start"
                 x = x + 1
             if letter == "C":
-                self.grid[(x, y)] = "path"
+                self.grid[(x, y)] = "chemin"
+                self.chemin.append((x, y))
                 x = x + 1
             if letter == "S":
                 self.grid[(x, y)] = "exit"
@@ -30,10 +32,9 @@ class Maze:
                 x = 0
                 y = y + 1
 
-
-
 if __name__ == "__main__":
     # ici tu test ton code
     maze = Maze()
     maze.set_grid()
-    print(maze.grid)
+    print(maze.grid)   
+    print(maze.chemin)
