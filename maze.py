@@ -57,23 +57,24 @@ class Maze:
             if direction == left:
                 x = x - 1 
 
-        for 
+        for macgyver in grid.values():
             if macgyver == "wall": #vérifier que la destination n'est pas un mur
                                     #vérifier que la destination n'est pas en dehors de la grille du labyrinthe
                 print("None")
 
+            i = 0
+            if macgyver == needle:              #vérifier s'il y a un objet ou non sur la case de destination
+                backpack_macgyver.append(i + 1) #ajouter l'objet ramassé dans le sac a dos de MacGyver
+            if macgyver == syringue:
+                backpack_macgyver.append(i + 1)
+            if macgyver == plastic_tube:
+                backpack_macgyver.append(i + 1)
+            if macgyver == ether:
+                backpack_macgyver.append(i + 1)
     
-    #vérifier s'il y a un objet ou non sur la case de destination
-    #"ramasser" cet objet. redéfinir la valeur de la clé dans la grille à "chemin"
-    #ajouter l'objet ramassé dans le sac a dos de MacGyver
-    #vérifier s'il y a le gardien ou non sur la case de destination
-    #Creation d'une classe qui va représenter Le gardien        
+    #"ramasser" cet objet. redéfinir la valeur de la clé dans la grille à "chemin"????????????????????????????
 
-    def backpack_macgyver(self):
-
-
-
-        if i == 4 and macgyver() == guardian():
+        if i == 4 and macgyver() == guardian(): #vérifier s'il y a le gardien ou non sur la case de destination
             print("Bravo! Tu as gagné!")
         elif i < 4 and macgyver() == guardian():
             print("game over! Tu as perdu")
