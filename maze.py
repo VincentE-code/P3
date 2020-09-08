@@ -2,13 +2,15 @@ import Items
 
 import Macgyver
 
+import Guardian
+
 class Maze:
 
     def __init__(self):
         print("object created")
         self.grid = {}
         self.chemin = []
-        self.items = [needle, syringue, plastic_tube, ether]
+        self.items = []
         self.backpack_macgyver = []
 
     def set_grid(self):
@@ -40,15 +42,27 @@ class Maze:
 
     def position_items(self): # Positionner les objets sur les chemins
         #Trouver comment remplacer aléatoirement un élément dans une liste 
-        items = [needle, syringue, plastic_tube, ether]
-        for chemin in grid.values():
+        items = []
+        for chemin in chemin:
 
     def macgyver_move(self): #Gérer les déplacements ! (haut, bas, droite, gauche)
-        for chemin in grid.values():
-            if 
+        macgyver = (x, y)
+        for macgyver in grid.values():
+            if direction == up:
+                y = y + 1
+            if direction == down:
+                y = y - 1
+            if direction == right:
+                x = x + 1
+            if direction == left:
+                x = x - 1 
 
-    #vérifier que la destination n'est pas un mur
-    #vérifier que la destination n'est pas en dehors de la grille du labyrinthe
+        for 
+            if macgyver == "wall": #vérifier que la destination n'est pas un mur
+                                    #vérifier que la destination n'est pas en dehors de la grille du labyrinthe
+                print("None")
+
+    
     #vérifier s'il y a un objet ou non sur la case de destination
     #"ramasser" cet objet. redéfinir la valeur de la clé dans la grille à "chemin"
     #ajouter l'objet ramassé dans le sac a dos de MacGyver
@@ -56,14 +70,17 @@ class Maze:
     #Creation d'une classe qui va représenter Le gardien        
 
     def backpack_macgyver(self):
-        if i == 4 and macgyver() == guardian()
-        print("Bravo! Tu as gagné!")
-        elif i < 4 and macgyver() == guardian()
-        print("game over! Tu as perdu")
+
+
+
+        if i == 4 and macgyver() == guardian():
+            print("Bravo! Tu as gagné!")
+        elif i < 4 and macgyver() == guardian():
+            print("game over! Tu as perdu")
         continue
 
-        if macgyver() == "exit" and i == 4
-        print("Bravo! Tu as gagné!")    
+        if macgyver() == "exit" and i == 4:
+            print("Bravo! Tu as gagné!")    
         continue
         
 
