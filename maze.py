@@ -12,7 +12,6 @@ class Maze:
         print("object created")
         self.grid = {}
         self.chemin = []
-        self.items = []
         self.backpack_macgyver = []
         self.set_grid
         self.position_items
@@ -46,19 +45,18 @@ class Maze:
                 x = 0
                 y = y + 1
 
-    def position_items(self): # Positionner les objets sur les chemins
-        #Trouver comment remplacer aléatoirement un élément dans une liste
+    def position_items(self): # Positionner les objets sur les chemins 
+        self.chemin.append(self.needle)
+        self.chemin.append(self.syringue)
+        self.chemin.append(self.plastic_tube)
+        self.chemin.append(self.ether)
         random.shuffle(self.chemin)
-        for chemin[0] in self.chemin:
-        for chemin[1] in self.chemin:
-        for chemin[2] in self.chemin:
-        for chemin[3] in self.chemin:
+
 
     def macgyver_move_in_grid(self):
         for macgyver in grid.values():
             if macgyver == "wall": #vérifier que la destination n'est pas un mur
-                                    #vérifier que la destination n'est pas en dehors de la grille du labyrinthe
-                print("None")
+                print("None") #vérifier que la destination n'est pas en dehors de la grille du labyrinthe
 
             i = 0
             if macgyver == "needle":              #vérifier s'il y a un objet ou non sur la case de destination
