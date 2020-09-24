@@ -1,8 +1,8 @@
-from Items import Items
+from Items.py import Items
 # from file import Element(s)
-from macgyver import Macgyver
+from macgyver.py import Macgyver
 
-from guardian import Guardian
+from guardian.py import Guardian
 
 import random
 
@@ -12,10 +12,12 @@ class Maze:
         print("object created")
         self.grid = {}
         self.chemin = []
-        self.backpack_macgyver = []
         self.set_grid
         self.position_items
-        self.macgyver
+        self.needle
+        self.syringue
+        self.plastic_tube
+        self.ether
 
     def set_grid(self):
         with open('maze.txt') as maze:
@@ -32,7 +34,6 @@ class Maze:
             if letter == "A":
                 self.grid[(x, y)] = "start"
                 x = x + 1
-                self.macgyver = macgyver(coo_x, coo_y)
             if letter == "C":
                 self.grid[(x, y)] = "chemin"
                 self.chemin.append((x, y)) # récupère les coordonnées des chemins dans la liste "chemin"
@@ -53,33 +54,8 @@ class Maze:
         random.shuffle(self.chemin)
 
 
-    def macgyver_move_in_grid(self):
-        for macgyver in grid.values():
-            if macgyver == "wall": #vérifier que la destination n'est pas un mur
-                print("None") #vérifier que la destination n'est pas en dehors de la grille du labyrinthe
-
-            i = 0
-            if macgyver == "needle":              #vérifier s'il y a un objet ou non sur la case de destination
-                backpack_macgyver.append(i + 1) #ajouter l'objet ramassé dans le sac a dos de MacGyver
-            if macgyver == "syringue":
-                backpack_macgyver.append(i + 1)
-            if macgyver == "plastic_tube":
-                backpack_macgyver.append(i + 1)
-            if macgyver == "ether":
-                backpack_macgyver.append(i + 1)
-    
-    #"ramasser" cet objet. redéfinir la valeur de la clé dans la grille à "chemin"????????????????????????????
-
-        if i == 4 and macgyver() == guardian(): #vérifier s'il y a le gardien ou non sur la case de destination
-            print("Bravo! Tu as gagné!")
-        elif i < 4 and macgyver() == guardian():
-            print("game over! Tu as perdu")
-        if macgyver() == "exit" and i == 4:
-            print("Bravo! Tu as gagné!")    
-
 if __name__ == "__main__":
     # ici tu test ton code
     maze = Maze()
     maze.set_grid()
     maze.position_items()
-    print(chemin)
