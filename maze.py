@@ -57,19 +57,24 @@ class Maze:
             self.chemin.remove(self.chemin[0])
 
     def macgyver_move(self): # gérer les déplacements de Macgyver
-        if direction == "up":
-            new_y = self.coo_y + 1
-            new_x = self.coo_x
-        elif direction == "down":
+        move = False
+        if move == "u": # "u" = up
             new_y = self.coo_y - 1
             new_x = self.coo_x
-        if direction == "right":
+            move = True
+        if move == "d": # "d" = down
+            new_y = self.coo_y + 1
+            new_x = self.coo_x
+            move = True
+        if move == "r": # "r" = right
             new_x = self.coo_x + 1
             new_y = self.coo_y
-        elif direction == "left":
+            move = True
+        if move == "l": # "l" = left
             new_x = self.coo_x - 1
             new_y = self.coo_y
-        #vérifier que la destination n'est pas un mur
+            move = True
+#vérifier que la destination n'est pas un mur
 
 if __name__== "__main__":
     # ici tu test ton code
