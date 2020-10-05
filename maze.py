@@ -16,7 +16,7 @@ class Maze:
         self.set_grid()
         self.position_items()
         self.macgyver_move()
-        self.macgyver_position()
+        self.can_move()
 
 
     def set_grid(self):
@@ -59,32 +59,35 @@ class Maze:
             # on vire la case déjà utilisée du self.chemin
             self.chemin.remove(self.chemin[0])
 
-    def macgyver_move(self): # gérer les déplacements de Macgyver
-        move = False
+    def macgyver_move(self, move): # gérer les déplacements de Macgyver
         if move == "u": # "u" = up
-            new_y = self.coo_y - 1
-            new_x = self.coo_x
-            move = True
+            new_y = self.macgyver.coo_y - 1
+            new_x = self.macgyver.coo_x
         if move == "d": # "d" = down
-            new_y = self.coo_y + 1
-            new_x = self.coo_x
-            move = True
+            new_y = self.macgyver.coo_y + 1
+            new_x = self.macgyver.coo_x
         if move == "r": # "r" = right
-            new_x = self.coo_x + 1
-            new_y = self.coo_y
-            move = True
+            new_x = self.macgyver.coo_x + 1
+            new_y = self.macgyver.coo_y
         if move == "l": # "l" = left
-            new_x = self.coo_x - 1
-            new_y = self.coo_y
-            move = True
+            new_x = self.macgyver.coo_x - 1
+            new_y = self.macgyver.coo_y
+        # tu connais les nouvelles coordonnées (new_x, new_y)
+        # tu dois vérifier ce qu'il y a sur les nouvelles coordonnées pour savoir
+        # si tu peux déplacer macgyver ou non
+        # et savoir si tu dois ramasser un objet ou non
+        # et savoir si tu es sur le gardien ou non
 
-    def macgyver_position(self):
-        move = False
-        macgyver = (self.coo_x, self.coo_y)
-        if (self.coo_x, self.coo_y) in self.wall: #vérifier que la destination n'est pas un mur
-            move = False
+    def can_move(self, coo_x, coo_y):
+        #vérifier que la destination n'est pas un mur
+        if (self.coo_x, self.coo_y) in self.wall:
+            pass
         if (self.coo_x, self.coo_y) in self.chemin:
-            move = True
+            # changer les coo de macgyver
+            self.macgyver.coo_x = coo_x
+            self.macgyver.coo_y = coo_y
+            # changer l'emplacement de macgayver dans la grille
+            # remettre la case où était macgyver en "chemin"
 
 
 if __name__== "__main__":
