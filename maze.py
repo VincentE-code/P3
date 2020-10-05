@@ -12,9 +12,11 @@ class Maze:
         # print("object created")
         self.grid = {}
         self.chemin = []
+        self.wall = []
         self.set_grid()
         self.position_items()
         self.macgyver_move()
+        self.macgyver_position()
 
 
     def set_grid(self):
@@ -29,6 +31,7 @@ class Maze:
             if letter == "M":
                 self.grid[(x, y)] = "wall"
                 x = x + 1
+                self.wall.append((x, y)) # récupère les coordonnées des chemins dans la liste "wall"
             if letter == "A":
                 self.grid[(x, y)] = "start"
                 x = x + 1
@@ -74,7 +77,15 @@ class Maze:
             new_x = self.coo_x - 1
             new_y = self.coo_y
             move = True
-#vérifier que la destination n'est pas un mur
+
+    def macgyver_position(self):
+        move = False
+        macgyver = (self.coo_x, self.coo_y)
+        if (self.coo_x, self.coo_y) in self.wall: #vérifier que la destination n'est pas un mur
+            move = False
+        if (self.coo_x, self.coo_y) in self.chemin:
+            move = True
+
 
 if __name__== "__main__":
     # ici tu test ton code
