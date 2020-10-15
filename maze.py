@@ -95,9 +95,6 @@ class Maze:
             print("Bravo! Tu as gagné!")
         elif backpack < 4
             print("game over! Tu as perdu")
-        if macgyver() == "exit" and i == 4:
-            print("Bravo! Tu as gagné!")
-
 
 
 if __name__== "__main__":
