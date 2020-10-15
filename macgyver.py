@@ -4,20 +4,6 @@ class Macgyver:
 		self.coo_x = x
 		self.coo_y = y
 		self.backpack = 0
-
-	#def macgyver_move(self): #Gérer les déplacements ! (haut, bas, droite, gauche)
-        #if direction == "up":
-            #new_y = self.coo_y + 1
-            #new_x = self.coo_x
-        #if direction == "down":
-            #new_y = self.coo_y - 1
-            #new_x = self.coo_x
-        #if direction == "right":
-            #new_x = self.coo_x + 1
-            #new_y = self.coo_y
-        #if direction == "left":
-            #new_x = self.coo_x - 1
-            #new_y = self.coo_y
         #for macgyver in grid.values():
             #if macgyver == "wall": #vérifier que la destination n'est pas un mur
                 #print("None") 

@@ -88,6 +88,16 @@ class Maze:
             self.macgyver.coo_y = coo_y
             # changer l'emplacement de macgayver dans la grille
             # remettre la case où était macgyver en "chemin"
+        if (self.coo_x, self.coo_y) in ["plastic_tube", "needle", "ether"]:
+            new_backpack = self.macgyver.backpack + 1
+        if (self.coo_x, self.coo_y) in guardian():
+            if backpack == 4
+            print("Bravo! Tu as gagné!")
+        elif backpack < 4
+            print("game over! Tu as perdu")
+        if macgyver() == "exit" and i == 4:
+            print("Bravo! Tu as gagné!")
+
 
 
 if __name__== "__main__":
