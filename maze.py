@@ -15,9 +15,17 @@ class Maze:
         self.wall = []
         self.set_grid()
         self.position_items()
-        self.macgyver_move()
+        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
+        self.macgyver_move("u")
+        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
+        self.macgyver_move("d")
+        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
+        self.macgyver_move("r")
+        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
+        self.macgyver_move("l")
+        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
         self.can_move()
-
+s
 
     def set_grid(self):
         with open('maze.txt') as maze:
@@ -91,9 +99,9 @@ class Maze:
         if (self.coo_x, self.coo_y) in ["plastic_tube", "needle", "ether"]:
             new_backpack = self.macgyver.backpack + 1
         if (self.coo_x, self.coo_y) in guardian():
-            if backpack == 4
+            if self.backpack == 3
             print("Bravo! Tu as gagné!")
-        elif backpack < 4
+        elif self.backpack < 3
             print("game over! Tu as perdu")
 
 
