@@ -13,6 +13,7 @@ class Maze:
         self.grid = {}
         self.chemin = []
         self.wall = []
+        self.backpack_space = []
         self.set_grid()
         self.position_items()
         print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
@@ -25,6 +26,7 @@ class Maze:
         self.macgyver_move("l")
         print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
         self.can_move()
+        self.full_backpack()
 
     def set_grid(self):
         with open('maze.txt') as maze:
@@ -95,15 +97,28 @@ class Maze:
             self.macgyver.coo_y = self.macgyver_move.new_y
             # changer l'emplacement de macgayver dans la grille
             # remettre la case où était macgyver en "chemin"
-        if (self.coo_x, self.coo_y) in ["plastic_tube", "needle", "ether"]:
+        if (self.coo_x, self.coo_y) in "plastic_tube":
+            self.is_picked_up = True
+            self.backpack_space.append("plastic_tube")
+            self.macgyver.coo_x = self.macgyver_move.new_x
+            self.macgyver.coo_y = self.macgyver_move.new_y
+        if (self.coo_x, self.coo_y) in "needle":
+            self.is_picked_up = True
+            self.backpack_space.append("needle")
+            self.macgyver.coo_x = self.macgyver_move.new_x
+            self.macgyver.coo_y = self.macgyver_move.new_y
+        if (self.coo_x, self.coo_y) in "ether":
+            self.is_picked_up = True
+            self.backpack_space.append("ether")
             self.macgyver.coo_x = self.macgyver_move.new_x
             self.macgyver.coo_y = self.macgyver_move.new_y
         if (self.coo_x, self.coo_y) in guardian():
-            if self.backpack = ["plastic_tube", "needle", "ether"]
-            print("Bravo! Tu as gagné!")
-        elif self.backpack < 3
+            if self.full_backpack == True:
+                self.macgyver.coo_x = self.macgyver_move.new_x
+                self.macgyver.coo_y = self.macgyver_move.new_y
+                print("Bravo! Tu as gagné!")
+        elif self.full_backpack == False: 
             print("game over! Tu as perdu")
-
 
 if __name__== "__main__":
     # ici tu test ton code
