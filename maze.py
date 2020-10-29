@@ -25,7 +25,6 @@ class Maze:
         self.macgyver_move("l")
         print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
         self.can_move()
-s
 
     def set_grid(self):
         with open('maze.txt') as maze:
@@ -92,14 +91,15 @@ s
             pass
         if (self.coo_x, self.coo_y) in self.chemin:
             # changer les coo de macgyver
-            self.macgyver.coo_x = coo_x
-            self.macgyver.coo_y = coo_y
+            self.macgyver.coo_x = self.macgyver_move.new_x
+            self.macgyver.coo_y = self.macgyver_move.new_y
             # changer l'emplacement de macgayver dans la grille
             # remettre la case où était macgyver en "chemin"
         if (self.coo_x, self.coo_y) in ["plastic_tube", "needle", "ether"]:
-            new_backpack = self.macgyver.backpack + 1
+            self.macgyver.coo_x = self.macgyver_move.new_x
+            self.macgyver.coo_y = self.macgyver_move.new_y
         if (self.coo_x, self.coo_y) in guardian():
-            if self.backpack == 3
+            if self.backpack = ["plastic_tube", "needle", "ether"]
             print("Bravo! Tu as gagné!")
         elif self.backpack < 3
             print("game over! Tu as perdu")
