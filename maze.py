@@ -16,23 +16,15 @@ class Maze:
         self.backpack_space = []
         self.set_grid()
         self.position_items()
-        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
-        self.macgyver_move("u")
-        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
-        self.macgyver_move("d")
-        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
-        self.macgyver_move("r")
-        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
-        self.macgyver_move("l")
-        print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
-        self.can_move()
-        self.full_backpack()
+        self.can_move(6, 2)
 
     def set_grid(self):
         with open('maze.txt') as maze:
             datas = maze.read()
         # je parcours toutes mes lettres
         # le retour a la ligne est le caractère "\n"
+        x = coo_x
+        y = coo_y
         x = 0
         y = 0
         for letter in datas:
@@ -102,16 +94,19 @@ class Maze:
             self.backpack_space.append("plastic_tube")
             self.macgyver.coo_x = self.macgyver_move.new_x
             self.macgyver.coo_y = self.macgyver_move.new_y
+            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
         if (self.coo_x, self.coo_y) in "needle":
             self.is_picked_up = True
             self.backpack_space.append("needle")
             self.macgyver.coo_x = self.macgyver_move.new_x
             self.macgyver.coo_y = self.macgyver_move.new_y
+            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
         if (self.coo_x, self.coo_y) in "ether":
             self.is_picked_up = True
             self.backpack_space.append("ether")
             self.macgyver.coo_x = self.macgyver_move.new_x
             self.macgyver.coo_y = self.macgyver_move.new_y
+            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
         if (self.coo_x, self.coo_y) in guardian():
             if self.full_backpack == True:
                 self.macgyver.coo_x = self.macgyver_move.new_x
@@ -124,3 +119,11 @@ if __name__== "__main__":
     # ici tu test ton code
     maze = Maze()
     print(maze.grid)
+    self.macgyver_move("u")
+    print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
+    self.macgyver_move("d")
+    print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
+    self.macgyver_move("r")
+    print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
+    self.macgyver_move("l")
+    print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
