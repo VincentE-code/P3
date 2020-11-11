@@ -6,6 +6,7 @@ from guardian import Guardian
 
 import random
 
+
 class Maze:
 
     def __init__(self):
@@ -17,14 +18,13 @@ class Maze:
         self.set_grid()
         self.position_items()
         self.can_move(6, 2)
+        self.full_backpack()
 
     def set_grid(self):
         with open('maze.txt') as maze:
             datas = maze.read()
         # je parcours toutes mes lettres
         # le retour a la ligne est le caractère "\n"
-        x = coo_x
-        y = coo_y
         x = 0
         y = 0
         for letter in datas:
@@ -32,14 +32,14 @@ class Maze:
             if letter == "M":
                 self.grid[(x, y)] = "wall"
                 x = x + 1
-                self.wall.append((x, y)) # récupère les coordonnées des chemins dans la liste "wall"
+                self.wall.append((x, y))
             if letter == "A":
                 self.grid[(x, y)] = "start"
                 x = x + 1
                 self.macgyver = (x, y)
             if letter == "C":
                 self.grid[(x, y)] = "chemin"
-                self.chemin.append((x, y)) # récupère les coordonnées des chemins dans la liste "chemin"
+                self.chemin.append((x, y))
                 x = x + 1
             if letter == "S":
                 self.grid[(x, y)] = "exit"
@@ -49,7 +49,7 @@ class Maze:
                 x = 0
                 y = y + 1
 
-    def position_items(self): # Positionner les objets sur les chemins 
+    def position_items(self):  # Positionner les objets sur les chemins
         # pour chacun des 3 objets
         for obj in ["plastic_tube", "needle", "ether"]:
             # on commence par mélanger les chemins
@@ -60,27 +60,27 @@ class Maze:
             # on vire la case déjà utilisée du self.chemin
             self.chemin.remove(self.chemin[0])
 
-    def macgyver_move(self, move): # gérer les déplacements de Macgyver
-        if move == "u": # "u" = up
+    def macgyver_move(self, move, new_x, new_y):
+        if move == "u":  # "u" = up
             new_y = self.macgyver.coo_y - 1
             new_x = self.macgyver.coo_x
-        if move == "d": # "d" = down
+        if move == "d":  # "d" = down
             new_y = self.macgyver.coo_y + 1
             new_x = self.macgyver.coo_x
-        if move == "r": # "r" = right
+        if move == "r":  # "r" = right
             new_x = self.macgyver.coo_x + 1
             new_y = self.macgyver.coo_y
-        if move == "l": # "l" = left
+        if move == "l":  # "l" = left
             new_x = self.macgyver.coo_x - 1
             new_y = self.macgyver.coo_y
         # tu connais les nouvelles coordonnées (new_x, new_y)
-        # tu dois vérifier ce qu'il y a sur les nouvelles coordonnées pour savoir
+        # tu dois vérifier ce qu'il y a sur les nouvelles coordonnées
         # si tu peux déplacer macgyver ou non
         # et savoir si tu dois ramasser un objet ou non
         # et savoir si tu es sur le gardien ou non
 
     def can_move(self, coo_x, coo_y):
-        #vérifier que la destination n'est pas un mur
+        # vérifier que la destination n'est pas un mur
         if (self.coo_x, self.coo_y) in self.wall:
             pass
         if (self.coo_x, self.coo_y) in self.chemin:
@@ -107,23 +107,24 @@ class Maze:
             self.macgyver.coo_x = self.macgyver_move.new_x
             self.macgyver.coo_y = self.macgyver_move.new_y
             self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
-        if (self.coo_x, self.coo_y) in guardian():
-            if self.full_backpack == True:
+        if (self.coo_x, self.coo_y) in Guardian():
+            if self.full_backpack is True:
                 self.macgyver.coo_x = self.macgyver_move.new_x
                 self.macgyver.coo_y = self.macgyver_move.new_y
                 print("Bravo! Tu as gagné!")
-        elif self.full_backpack == False: 
+        elif self.full_backpack is False:
             print("game over! Tu as perdu")
 
-if __name__== "__main__":
-    # ici tu test ton code
+
+if __name__ == "__main__":
+
     maze = Maze()
     print(maze.grid)
-    self.macgyver_move("u")
-    print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
-    self.macgyver_move("d")
-    print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
-    self.macgyver_move("r")
-    print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
-    self.macgyver_move("l")
-    print(self.macgyver_move.coo_x, self.macgyver_move.coo_y)
+    macgyver_move("u")
+    print(macgyver_move.coo_x, macgyver_move.coo_y)
+    macgyver_move("d")
+    print(macgyver_move.coo_x, macgyver_move.coo_y)
+    macgyver_move("r")
+    print(macgyver_move.coo_x, macgyver_move.coo_y)
+    macgyver_move("l")
+    print(macgyver_move.coo_x, macgyver_move.coo_y)
