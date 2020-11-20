@@ -18,7 +18,7 @@ class Maze:
         self.set_grid()
         self.position_items()
         self.can_move(6, 2)
-        self.full_backpack()
+        self.macgyver_move("u")
 
     def set_grid(self):
         with open('maze.txt') as maze:
@@ -36,7 +36,7 @@ class Maze:
             if letter == "A":
                 self.grid[(x, y)] = "start"
                 x = x + 1
-                self.macgyver = (x, y)
+                self.macgyver = macgyver(x, y)
             if letter == "C":
                 self.grid[(x, y)] = "chemin"
                 self.chemin.append((x, y))
@@ -60,53 +60,41 @@ class Maze:
             # on vire la case déjà utilisée du self.chemin
             self.chemin.remove(self.chemin[0])
 
-    def macgyver_move(self, move, new_x, new_y):
+    def macgyver_move(self, move):
         if move == "u":  # "u" = up
-            new_y = self.macgyver.coo_y - 1
-            new_x = self.macgyver.coo_x
+            new_y = macgyver(y) - 1
+            new_x = macgyver(x)
         if move == "d":  # "d" = down
-            new_y = self.macgyver.coo_y + 1
-            new_x = self.macgyver.coo_x
+            new_y = macgyver(y) + 1
+            new_x = macgyver(x)
         if move == "r":  # "r" = right
-            new_x = self.macgyver.coo_x + 1
-            new_y = self.macgyver.coo_y
+            new_x = macgyver(x) + 1
+            new_y = macgyver(y)
         if move == "l":  # "l" = left
-            new_x = self.macgyver.coo_x - 1
-            new_y = self.macgyver.coo_y
+            new_x = macgyver(x) - 1
+            new_y = macgyver(y)
         # tu connais les nouvelles coordonnées (new_x, new_y)
         # tu dois vérifier ce qu'il y a sur les nouvelles coordonnées
         # si tu peux déplacer macgyver ou non
         # et savoir si tu dois ramasser un objet ou non
         # et savoir si tu es sur le gardien ou non
 
-    def can_move(self, coo_x, coo_y):
+    def can_move(self, coo_x, coo_y, full_backpack):
         # vérifier que la destination n'est pas un mur
-        if (self.coo_x, self.coo_y) in self.wall:
+        if macgyver(x, y) in self.wall:
             pass
-        if (self.coo_x, self.coo_y) in self.chemin:
+        if macgyver(x, y) in self.chemin:
             # changer les coo de macgyver
-            self.macgyver.coo_x = self.macgyver_move.new_x
-            self.macgyver.coo_y = self.macgyver_move.new_y
-            # changer l'emplacement de macgayver dans la grille
+            self.macgyver_move(new_x, new_y) = macgyver(x, y)
+            return macgyver(x, y)
             # remettre la case où était macgyver en "chemin"
-        if (self.coo_x, self.coo_y) in "plastic_tube":
-            self.is_picked_up = True
-            self.backpack_space.append("plastic_tube")
-            self.macgyver.coo_x = self.macgyver_move.new_x
-            self.macgyver.coo_y = self.macgyver_move.new_y
-            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
-        if (self.coo_x, self.coo_y) in "needle":
-            self.is_picked_up = True
-            self.backpack_space.append("needle")
-            self.macgyver.coo_x = self.macgyver_move.new_x
-            self.macgyver.coo_y = self.macgyver_move.new_y
-            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
-        if (self.coo_x, self.coo_y) in "ether":
-            self.is_picked_up = True
-            self.backpack_space.append("ether")
-            self.macgyver.coo_x = self.macgyver_move.new_x
-            self.macgyver.coo_y = self.macgyver_move.new_y
-            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
+        for obj in ["plastic_tube", "needle", "ether"]:
+            if macgyver(self.coo_x, self.coo_y) in obj:
+                self.is_picked_up = True
+                self.backpack_space.append(obj)
+                self.macgyver.coo_x = self.macgyver_move.new_x
+                self.macgyver.coo_y = self.macgyver_move.new_y
+                self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
         if (self.coo_x, self.coo_y) in Guardian():
             if self.full_backpack is True:
                 self.macgyver.coo_x = self.macgyver_move.new_x
