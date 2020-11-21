@@ -79,40 +79,33 @@ class Maze:
         # et savoir si tu dois ramasser un objet ou non
         # et savoir si tu es sur le gardien ou non
 
-    def can_move(self, coo_x, coo_y, full_backpack):
+    def can_move(self, full_backpack):
         # vérifier que la destination n'est pas un mur
         if macgyver(x, y) in self.wall:
             pass
         if macgyver(x, y) in self.chemin:
             # changer les coo de macgyver
-            self.macgyver_move(new_x, new_y) = macgyver(x, y)
+            macgyver(x) = self.macgyver_move.new_x
+            macgyver(y) = self.macgyver_move.new_y
             return macgyver(x, y)
             # remettre la case où était macgyver en "chemin"
         for obj in ["plastic_tube", "needle", "ether"]:
-            if macgyver(self.coo_x, self.coo_y) in obj:
+            if macgyver(x, y) in obj:
                 self.is_picked_up = True
                 self.backpack_space.append(obj)
                 self.macgyver.coo_x = self.macgyver_move.new_x
                 self.macgyver.coo_y = self.macgyver_move.new_y
                 self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
-        if (self.coo_x, self.coo_y) in Guardian():
-            if self.full_backpack is True:
-                self.macgyver.coo_x = self.macgyver_move.new_x
-                self.macgyver.coo_y = self.macgyver_move.new_y
-                print("Bravo! Tu as gagné!")
-        elif self.full_backpack is False:
-            print("game over! Tu as perdu")
+            if macgyver(x, y) in Guardian():
+                if self.full_backpack is True:
+                    self.macgyver.coo_x = self.macgyver_move.new_x
+                    self.macgyver.coo_y = self.macgyver_move.new_y
+                    print("Bravo! Tu as gagné!")
+                elif self.full_backpack is False:
+                    print("game over! Tu as perdu")
 
 
 if __name__ == "__main__":
 
     maze = Maze()
     print(maze.grid)
-    macgyver_move("u")
-    print(macgyver_move.coo_x, macgyver_move.coo_y)
-    macgyver_move("d")
-    print(macgyver_move.coo_x, macgyver_move.coo_y)
-    macgyver_move("r")
-    print(macgyver_move.coo_x, macgyver_move.coo_y)
-    macgyver_move("l")
-    print(macgyver_move.coo_x, macgyver_move.coo_y)

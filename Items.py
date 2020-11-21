@@ -1,3 +1,8 @@
+"""
+This module defines the items
+
+"""
+
 class Items:
 
     def __init__(self, name):

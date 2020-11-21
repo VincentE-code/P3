@@ -1,6 +1,10 @@
+"""
+This module defines the character macgyver
+
+"""
+
 class Macgyver:
-    """
-    This class manages Macgyver."""
+
 
     def __init__(self, x, y):
         self.coo_x = x
