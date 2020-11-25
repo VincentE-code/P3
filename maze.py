@@ -1,4 +1,4 @@
-from Items import Items
+from items import Items
 # from file import Element(s)
 from macgyver import Macgyver
 
@@ -79,7 +79,7 @@ class Maze:
         # et savoir si tu dois ramasser un objet ou non
         # et savoir si tu es sur le gardien ou non
 
-    def can_move(self, full_backpack):
+    def can_move(self, full_backpack, macgyver_move):
         # vérifier que la destination n'est pas un mur
         if macgyver(x, y) in self.wall:
             pass
@@ -109,3 +109,4 @@ if __name__ == "__main__":
 
     maze = Maze()
     print(maze.grid)
+    print(maze.can_move)
