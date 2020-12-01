@@ -23,12 +23,27 @@ while running:
     # blit va ajouter l'image de mon choix
     screen.blit(background, (0, 0))
 
-    #définir la grille
-
-
+    # définir la grille
     # si le joueur ferme cette fenêtre
     for event in pygame.event.get():
         # que l'évenement est la fermeture de fenêtre
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
+
+        if event.type == pygame.KEYDOWN:
+        	if event.key == pygame.K_RIGHT:
+        		self.maze.directional_keys = "r"
+        		print("déplacement vers la droite")
+
+        	if event.key == pygame.K_LEFT:
+        		self.maze.directional_keys = "l"
+        		print("déplacement vers la gauche")
+
+        	if event.key == pygame.K_UP:
+        		self.maze.directional_keys = "u"
+        		print("déplacement vers le haut")
+
+        	if event.key == pygame.K_DOWN:
+        		self.maze.directional_keys = "d"
+        		print("déplacement vers le bas")
