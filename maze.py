@@ -6,8 +6,6 @@ This module defines the maze.
 
 import random
 
-from items import Items
-# from file import Element(s)
 from macgyver import Macgyver
 
 from guardian import Guardian
@@ -27,7 +25,8 @@ class Maze:
         self.position_items()
         self.move_on_destination((2, 12))
         self.directional_keys("l")
-        self.macgyver(2, 11)
+        self.macgyver = None
+        self.guardian = None
 
     def set_grid(self):
         """set_grid defined the maze."""
@@ -35,29 +34,30 @@ class Maze:
             datas = maze.read()
         # je parcours toutes mes lettres
         # le retour a la ligne est le caractère "\n"
-        x = 0
-        y = 0
+        count_x = 0
+        count_y = 0
         for letter in datas:
-            print(x, y)
+            print(count_x, count_y)
             if letter == "M":
-                self.grid[(x, y)] = "wall"
-                x = x + 1
-                self.wall.append((x, y))
+                self.grid[(count_x, count_y)] = "wall"
+                count_x = count_x + 1
+                self.wall.append((count_x, count_y))
             if letter == "A":
-                self.grid[(x, y)] = "start"
-                x = x + 1
-                self.macgyver = self.macgyver(self.macgyver.coo_x, self.macgyver.coo_y)
+                self.grid[(count_x, count_y)] = "start"
+                count_x = count_x + 1
+                self.macgyver = Macgyver(count_x, self.macgyver.coo_y)
             if letter == "C":
-                self.grid[(x, y)] = "chemin"
-                self.chemin.append((x, y))
-                x = x + 1
+                self.grid[(count_x, count_y)] = "chemin"
+                self.chemin.append((count_x, count_y))
+                count_x = count_x + 1
             if letter == "S":
-                self.grid[(x, y)] = "exit"
-                x = x + 1
+                self.grid[(count_x, count_y)] = "exit"
+                count_x = count_x + 1
+                self.guardian = Guardian(count_x, count_y)
             if letter == "\n":
                 print("line break")
-                x = 0
-                y = y + 1
+                count_x = 0
+                count_y = count_y + 1
 
     def position_items(self):
         """position_items positions the objects on the paths."""
@@ -114,12 +114,12 @@ class Maze:
 
 if __name__ == "__main__":
 
-    maze = Maze()
+    MAZE_OBJECT = Maze()
     # tester directional_keys en bas
-    print(maze.directional_keys("d"))
+    print(MAZE_OBJECT.directional_keys("d"))
     # tester directional_keys en haut
-    print(maze.directional_keys("u"))
+    print(MAZE_OBJECT.directional_keys("u"))
     # tester directional_keys à droite
-    print(maze.directional_keys("r"))
+    print(MAZE_OBJECT.directional_keys("r"))
     # tester directional_keys à gauche
-    print(maze.directional_keys("l"))
+    print(MAZE_OBJECT.directional_keys("l"))
