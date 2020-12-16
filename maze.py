@@ -71,7 +71,8 @@ class Maze:
             self.chemin.remove(self.chemin[0])
 
     def directional_keys(self, move):
-        """directional_keys manages the movements according to the directional keys."""
+        """directional_keys manages the movements
+        according to the directional keys."""
         if move == "u":  # "u" = up
             new_y = self.macgyver.coo_y - 1
             new_x = self.macgyver.coo_x
@@ -87,7 +88,8 @@ class Maze:
         return (new_x, new_y)
 
     def move_on_destination(self, new_coo):
-        """move_on_destination move the player according to what he is on the destination."""
+        """move_on_destination move the player
+        according to what he is on the destination."""
         if new_coo in self.wall:
             pass
         if new_coo in self.chemin:
