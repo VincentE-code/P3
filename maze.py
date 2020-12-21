@@ -45,7 +45,7 @@ class Maze:
             if letter == "A":
                 self.grid[(count_x, count_y)] = "start"
                 count_x = count_x + 1
-                self.macgyver = Macgyver(count_x, self.macgyver.coo_y)
+                self.macgyver = Macgyver(count_x, count_y)
             if letter == "C":
                 self.grid[(count_x, count_y)] = "chemin"
                 self.chemin.append((count_x, count_y))
