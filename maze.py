@@ -21,12 +21,12 @@ class Maze:
         self.chemin = []
         self.wall = []
         self.backpack_space = []
-        self.set_grid()
-        self.position_items()
-        self.move_on_destination((2, 12))
-        self.directional_keys("l")
         self.macgyver = None
         self.guardian = None
+        self.set_grid()
+        self.position_items()
+        # self.move_on_destination((2, 12))
+        # self.directional_keys("l")
 
     def set_grid(self):
         """set_grid defined the maze."""
@@ -73,6 +73,7 @@ class Maze:
     def directional_keys(self, move):
         """directional_keys manages the movements
         according to the directional keys."""
+        print(self.macgyver.coo_x, self.macgyver.coo_y)
         if move == "u":  # "u" = up
             new_y = self.macgyver.coo_y - 1
             new_x = self.macgyver.coo_x
@@ -99,13 +100,13 @@ class Maze:
             self.macgyver.coo_x = new_coo[0]
             self.macgyver.coo_y = new_coo[1]
         for obj in ["plastic_tube", "needle", "ether"]:
-            if new_coo in obj:
+            if self.grid[new_coo] in obj:
                 self.is_picked_up = True
                 self.backpack_space.append(obj)
                 self.macgyver.coo_x = new_coo[0]
                 self.macgyver.coo_y = new_coo[1]
                 self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
-            if new_coo in self.guardian():
+            if new_coo == (self.guardian.coo_x, self.guardian.coo_y):
                 if self.macgyver.full_backpack is True:
                     self.macgyver.coo_x = new_coo[0]
                     self.macgyver.coo_y = new_coo[1]
@@ -125,3 +126,4 @@ if __name__ == "__main__":
     print(MAZE_OBJECT.directional_keys("r"))
     # tester directional_keys à gauche
     print(MAZE_OBJECT.directional_keys("l"))
+
