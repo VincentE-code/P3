@@ -9,16 +9,16 @@ import pygame
 from maze import Maze
 
 
-class Macgyver_game:
+class Macgyvergame:
 
     """We find in this class the game of the project."""
-
-    pygame.init()
 
     def __init__(self):
         self.game_settings()
         self.game_loop()
         self.running = True
+        self.maze = Maze()
+        self.pygame = pygame.init()
 
     def game_settings(self):
         """game_settings defined the settings of the game."""
@@ -44,7 +44,7 @@ class Macgyver_game:
             elif value == "S":
                 image = "exit.png"
             elif value == "B":
-                image == "guardian.png"
+                image = "guardian.png"
 
         self.maze.position_items()
 
@@ -55,24 +55,24 @@ class Macgyver_game:
         """position_items positions the objects on the paths."""
         while self.running:
             for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RIGHT:
+                if event.type == self.pygame.KEYDOWN:
+                    if event.key == self.pygame.K_RIGHT:
                         way_to_go = self.maze.directional_keys("r")
-                    if event.key == pygame.K_LEFT:
+                    if event.key == self.pygame.K_LEFT:
                         way_to_go = self.maze.directional_keys("l")
-                    if event.key == pygame.K_UP:
+                    if event.key == self.pygame.K_UP:
                         way_to_go = self.maze.directional_keys("u")
-                    if event.key == pygame.K_DOWN:
+                    if event.key == self.pygame.K_DOWN:
                         way_to_go = self.maze.directional_keys("d")
 
-            self.maze.move_on_destination(way_to_go)
+                self.maze.move_on_destination(way_to_go)
 
             # que l'évenement est la fermeture de fenêtre
-            if event.type == pygame.QUIT:
-                self.running = False
-                pygame.quit()
+                if event.type == pygame.QUIT:
+                    self.running = False
+                    pygame.quit()
 
 
 if __name__ == "__main__":
 
-    MACGYVER_GAME = Macgyver_game()
+    MACGYVER_GAME = Macgyvergame()
