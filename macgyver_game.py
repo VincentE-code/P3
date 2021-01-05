@@ -43,56 +43,47 @@ class Macgyvergame:
             print("value : ", value)
             if value == "wall":
                 image = self.wall_img
-                pygame.display.flip()
             elif value == "start":
                 image = self.macgyver_img
-                pygame.display.flip()
             elif value == "chemin":
                 image = self.floor_img
-                pygame.display.flip()
             elif value == "exit":
                 image = self.exit_img
-                pygame.display.flip()
             elif value == "B":
                 image = self.guardian_img
-                pygame.display.flip()
             elif value == "plastic_tube":
                 image = self.tube_img
-                pygame.display.flip()
             elif value == "needle":
                 image = self.needle_img
-                pygame.display.flip()
             elif value == "ether":
                 image = self.ether_img
-                pygame.display.flip()
-
-            # afficher la case
+                
             self.screen.blit(image, (coo_x, coo_y))
+
+            pygame.display.flip()
+
 
     def game_loop(self):
         """position_items positions the objects on the paths."""
         while self.running:
+
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RIGHT:
                         way_to_go = self.maze.directional_keys("r")
-                        pygame.display.flip()
                     if event.key == pygame.K_LEFT:
                         way_to_go = self.maze.directional_keys("l")
-                        pygame.display.flip()
                     if event.key == pygame.K_UP:
                         way_to_go = self.maze.directional_keys("u")
-                        pygame.display.flip()
                     if event.key == pygame.K_DOWN:
                         way_to_go = self.maze.directional_keys("d")
-                        pygame.display.flip()
 
                     self.maze.move_on_destination(way_to_go)
 
             # que l'évenement est la fermeture de fenêtre
-                if event.type == pygame.QUIT:
-                    self.running = False
-                    pygame.quit()
+            if event.type == pygame.QUIT:
+                self.running = False
+                pygame.quit()
 
 
 if __name__ == "__main__":
