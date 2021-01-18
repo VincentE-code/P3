@@ -8,6 +8,7 @@ import pygame
 
 from maze import Maze
 
+
 class Macgyvergame:
 
     """We find in this class the game of the project."""
@@ -20,9 +21,9 @@ class Macgyvergame:
         self.screen = pygame.display.set_mode((300, 300))
         self.wall_img = pygame.image.load("ressource/wall.png")
         self.macgyver_img = pygame.image.load("ressource/macgyver.png")
-        self.floor_img = pygame.image.load("ressource/floor_image.png")
+        self.floor_img = pygame.image.load("ressource/floor.png")
         self.exit_img = pygame.image.load("ressource/exit.png")
-        self.guardian_img = pygame.image.load("ressource/guardian.png")
+        self.guardian_img = pygame.image.load("ressource/guardian_image.png")
         self.tube_img = pygame.image.load("ressource/plastic_tube.png")
         self.ether_img = pygame.image.load("ressource/ether.png")
         self.needle_img = pygame.image.load("ressource/needle.png")
@@ -43,25 +44,30 @@ class Macgyvergame:
             print("value : ", value)
             if value == "wall":
                 image = self.wall_img
+                self.screen.blit(image, (coo_x, coo_y))
             elif value == "start":
                 image = self.macgyver_img
+                self.screen.blit(image, (coo_x, coo_y))
             elif value == "chemin":
                 image = self.floor_img
+                self.screen.blit(image, (coo_x, coo_y))
             elif value == "exit":
                 image = self.exit_img
-            elif value == "B":
+                self.screen.blit(image, (coo_x, coo_y))
+            elif value == "guardian":
                 image = self.guardian_img
+                self.screen.blit(image, (coo_x, coo_y))
             elif value == "plastic_tube":
                 image = self.tube_img
+                self.screen.blit(image, (coo_x, coo_y))
             elif value == "needle":
                 image = self.needle_img
+                self.screen.blit(image, (coo_x, coo_y))
             elif value == "ether":
                 image = self.ether_img
-                
-            self.screen.blit(image, (coo_x, coo_y))
+                self.screen.blit(image, (coo_x, coo_y))
 
-            pygame.display.flip()
-
+        pygame.display.flip()
 
     def game_loop(self):
         """position_items positions the objects on the paths."""
@@ -79,6 +85,8 @@ class Macgyvergame:
                         way_to_go = self.maze.directional_keys("d")
 
                     self.maze.move_on_destination(way_to_go)
+
+                pygame.display.flip()    
 
             # que l'évenement est la fermeture de fenêtre
             if event.type == pygame.QUIT:

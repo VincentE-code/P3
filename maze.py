@@ -25,7 +25,7 @@ class Maze:
         self.guardian = None
         self.set_grid()
         self.position_items()
-        # self.move_on_destination((2, 12))
+        # self.move_on_destination(2, 12)
         # self.directional_keys("l")
 
     def set_grid(self):
@@ -46,6 +46,10 @@ class Maze:
                 self.grid[(count_x, count_y)] = "start"
                 count_x = count_x + 1
                 self.macgyver = Macgyver(count_x, count_y)
+            if letter == "B":
+                self.grid[(count_x, count_y)] = "guardian"
+                count_x = count_x + 1
+                self.guardian = Guardian(count_x, count_y)
             if letter == "C":
                 self.grid[(count_x, count_y)] = "chemin"
                 self.chemin.append((count_x, count_y))
@@ -126,4 +130,3 @@ if __name__ == "__main__":
     print(MAZE_OBJECT.directional_keys("r"))
     # tester directional_keys à gauche
     print(MAZE_OBJECT.directional_keys("l"))
-
