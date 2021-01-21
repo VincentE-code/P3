@@ -43,7 +43,7 @@ class Maze:
                 count_x = count_x + 1
                 self.wall.append((count_x, count_y))
             if letter == "A":
-                self.grid[(count_x, count_y)] = "start"
+                self.grid[(count_x, count_y)] = "macgyver"
                 count_x = count_x + 1
                 self.macgyver = Macgyver(count_x, count_y)
             if letter == "B":
@@ -51,7 +51,7 @@ class Maze:
                 count_x = count_x + 1
                 self.guardian = Guardian(count_x, count_y)
             if letter == "C":
-                self.grid[(count_x, count_y)] = "chemin"
+                self.grid[(count_x, count_y)] = "floor"
                 self.chemin.append((count_x, count_y))
                 count_x = count_x + 1
             if letter == "S":

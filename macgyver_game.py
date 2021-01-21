@@ -19,14 +19,15 @@ class Macgyvergame:
         pygame.init()
         pygame.display.set_caption("Macgyver maze")
         self.screen = pygame.display.set_mode((300, 300))
-        self.wall_img = pygame.image.load("ressource/wall.png")
-        self.macgyver_img = pygame.image.load("ressource/macgyver.png")
-        self.floor_img = pygame.image.load("ressource/floor.png")
-        self.exit_img = pygame.image.load("ressource/exit.png")
-        self.guardian_img = pygame.image.load("ressource/guardian_image.png")
-        self.tube_img = pygame.image.load("ressource/plastic_tube.png")
-        self.ether_img = pygame.image.load("ressource/ether.png")
-        self.needle_img = pygame.image.load("ressource/needle.png")
+        self.images = {"wall": pygame.image.load("ressource/wall.png"),
+        "macgyver": pygame.image.load("ressource/macgyver.png"),
+        "floor": pygame.image.load("ressource/floor.png"),
+        "exit": pygame.image.load("ressource/exit.png"),
+        "guardian": pygame.image.load("ressource/guardian_image.png"),
+        "plastic_tube": pygame.image.load("ressource/plastic_tube.png"),
+        "ether": pygame.image.load("ressource/ether.png"),
+        "needle": pygame.image.load("ressource/needle.png"),
+        }
         self.game_settings()
         self.game_loop()
 
@@ -40,32 +41,7 @@ class Macgyvergame:
             # value = M / A / C / S ....
             coo_x = key[0] * taille_carre
             coo_y = key[1] * taille_carre
-            image = ""
-            print("value : ", value)
-            if value == "wall":
-                image = self.wall_img
-                self.screen.blit(image, (coo_x, coo_y))
-            elif value == "start":
-                image = self.macgyver_img
-                self.screen.blit(image, (coo_x, coo_y))
-            elif value == "chemin":
-                image = self.floor_img
-                self.screen.blit(image, (coo_x, coo_y))
-            elif value == "exit":
-                image = self.exit_img
-                self.screen.blit(image, (coo_x, coo_y))
-            elif value == "guardian":
-                image = self.guardian_img
-                self.screen.blit(image, (coo_x, coo_y))
-            elif value == "plastic_tube":
-                image = self.tube_img
-                self.screen.blit(image, (coo_x, coo_y))
-            elif value == "needle":
-                image = self.needle_img
-                self.screen.blit(image, (coo_x, coo_y))
-            elif value == "ether":
-                image = self.ether_img
-                self.screen.blit(image, (coo_x, coo_y))
+            self.screen.blit(self.images[value], (coo_x, coo_y))
 
         pygame.display.flip()
 
@@ -85,6 +61,11 @@ class Macgyvergame:
                         way_to_go = self.maze.directional_keys("d")
 
                     self.maze.move_on_destination(way_to_go)
+                    taille_carre = 20
+                    new_x = way_to_go[0] * taille_carre
+                    new_y = way_to_go[1] * taille_carre
+
+                    self.screen.blit(self.images["macgyver"], (new_x, new_y))
 
                 pygame.display.flip()    
 
