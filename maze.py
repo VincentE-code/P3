@@ -77,20 +77,17 @@ class Maze:
     def directional_keys(self, move):
         """directional_keys manages the movements
         according to the directional keys."""
+        old_coo = (self.macgyver.coo_x, self.macgyver.coo_y)
         print(self.macgyver.coo_x, self.macgyver.coo_y)
         if move == "u":  # "u" = up
-            new_y = self.macgyver.coo_y - 1
-            new_x = self.macgyver.coo_x
+            self.macgyver.coo_y -= 1
         if move == "d":  # "d" = down
-            new_y = self.macgyver.coo_y + 1
-            new_x = self.macgyver.coo_x
+            self.macgyver.coo_y += 1
         if move == "r":  # "r" = right
-            new_x = self.macgyver.coo_x + 1
-            new_y = self.macgyver.coo_y
+            self.macgyver.coo_x += 1
         if move == "l":  # "l" = left
-            new_x = self.macgyver.coo_x - 1
-            new_y = self.macgyver.coo_y
-        return (new_x, new_y)
+            self.macgyver.coo_x -= 1
+        return [old_coo, (self.macgyver.coo_x, self.macgyver.coo_y)]
 
     def move_on_destination(self, new_coo):
         """move_on_destination move the player
@@ -104,7 +101,7 @@ class Maze:
             self.macgyver.coo_x = new_coo[0]
             self.macgyver.coo_y = new_coo[1]
         for obj in ["plastic_tube", "needle", "ether"]:
-            if self.grid[new_coo] in obj:
+            if self.grid[self.macgyver.coo_x, self.macgyver.coo_y] in obj:
                 self.is_picked_up = True
                 self.backpack_space.append(obj)
                 self.macgyver.coo_x = new_coo[0]
