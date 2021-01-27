@@ -49,7 +49,8 @@ class Macgyvergame:
         """position_items positions the objects on the paths."""
         while self.running:
             taille_carre = 20
-
+            new_x = self.maze.macgyver.coo_x
+            new_y = self.maze.macgyver.coo_y
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RIGHT:
@@ -64,10 +65,9 @@ class Macgyvergame:
                     self.maze.move_on_destination(way_to_go)
                     new_x = way_to_go[0] * taille_carre 
                     new_y = way_to_go[1] * taille_carre
+                    self.screen.blit(self.images["macgyver"], (new_x, new_y))
 
-                self.screen.blit(self.images["macgyver"], (new_x, new_y))
-
-                pygame.display.flip()    
+            pygame.display.flip()    
 
             # que l'évenement est la fermeture de fenêtre
             if event.type == pygame.QUIT:
