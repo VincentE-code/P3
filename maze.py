@@ -25,8 +25,8 @@ class Maze:
         self.guardian = None
         self.set_grid()
         self.position_items()
-        # self.move_on_destination(2, 12)
-        # self.directional_keys("l")
+        self.directional_keys()
+        self.move_on_destination()
 
     def set_grid(self):
         """set_grid defined the maze."""
@@ -79,13 +79,13 @@ class Maze:
         according to the directional keys."""
         old_coo = (self.macgyver.coo_x, self.macgyver.coo_y)
         print(self.macgyver.coo_x, self.macgyver.coo_y)
-        if move == "u":  # "u" = up
+        if self.move == "u":  # "u" = up
             self.macgyver.coo_y -= 1
-        if move == "d":  # "d" = down
+        if self.move == "d":  # "d" = down
             self.macgyver.coo_y += 1
-        if move == "r":  # "r" = right
+        if self.move == "r":  # "r" = right
             self.macgyver.coo_x += 1
-        if move == "l":  # "l" = left
+        if self.move == "l":  # "l" = left
             self.macgyver.coo_x -= 1
         return [old_coo, (self.macgyver.coo_x, self.macgyver.coo_y)]
 
@@ -100,8 +100,9 @@ class Maze:
             # changer les coo de macgyver
             self.macgyver.coo_x = new_coo[0]
             self.macgyver.coo_y = new_coo[1]
+            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
         for obj in ["plastic_tube", "needle", "ether"]:
-            if self.grid[self.macgyver.coo_x, self.macgyver.coo_y] in obj:
+            if self.grid[new_coo] in obj:
                 self.is_picked_up = True
                 self.backpack_space.append(obj)
                 self.macgyver.coo_x = new_coo[0]
