@@ -18,15 +18,15 @@ class Maze:
     def __init__(self):
         # print("object created")
         self.grid = {}
-        self.chemin = []
+        self.floor = []
         self.wall = []
         self.backpack_space = []
         self.macgyver = None
         self.guardian = None
         self.set_grid()
         self.position_items()
-        self.directional_keys()
-        self.move_on_destination()
+        self.directional_keys("")
+        self.move_on_destination(self.new_coo)
 
     def set_grid(self):
         """set_grid defined the maze."""
@@ -52,7 +52,7 @@ class Maze:
                 self.guardian = Guardian(count_x, count_y)
             if letter == "C":
                 self.grid[(count_x, count_y)] = "floor"
-                self.chemin.append((count_x, count_y))
+                self.floor.append((count_x, count_y))
                 count_x = count_x + 1
             if letter == "S":
                 self.grid[(count_x, count_y)] = "exit"
@@ -67,48 +67,49 @@ class Maze:
         """position_items positions the objects on the paths."""
         for obj in ["plastic_tube", "needle", "ether"]:
             # on commence par mélanger les chemins
-            random.shuffle(self.chemin)
-            # print(self.chemin[0])
+            random.shuffle(self.floor)
+            # print(self.floor[0])
             # on prend la première case, et on y colle un objet
-            self.grid[self.chemin[0]] = obj
-            # on vire la case déjà utilisée du self.chemin
-            self.chemin.remove(self.chemin[0])
+            self.grid[self.floor[0]] = obj
+            # on vire la case déjà utilisée du self.floor
+            self.floor.remove(self.floor[0])
 
     def directional_keys(self, move):
         """directional_keys manages the movements
         according to the directional keys."""
-        old_coo = (self.macgyver.coo_x, self.macgyver.coo_y)
+        self.old_coo = (self.macgyver.coo_x, self.macgyver.coo_y)
         print(self.macgyver.coo_x, self.macgyver.coo_y)
-        if self.move == "u":  # "u" = up
+        if move == "u":  # "u" = up
             self.macgyver.coo_y -= 1
-        if self.move == "d":  # "d" = down
+        if move == "d":  # "d" = down
             self.macgyver.coo_y += 1
-        if self.move == "r":  # "r" = right
+        if move == "r":  # "r" = right
             self.macgyver.coo_x += 1
-        if self.move == "l":  # "l" = left
+        if move == "l":  # "l" = left
             self.macgyver.coo_x -= 1
-        return [old_coo, (self.macgyver.coo_x, self.macgyver.coo_y)]
+        return [self.old_coo, (self.macgyver.coo_x, self.macgyver.coo_y)]
 
     def move_on_destination(self, new_coo):
         """move_on_destination move the player
         according to what he is on the destination."""
         if new_coo in self.wall:
             pass
-        if new_coo in self.chemin:
-            # remettre la case où était macgyver en "chemin"
-            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
+        if new_coo in self.floor:
+            # remettre la case où était macgyver en "floor"
+            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
             # changer les coo de macgyver
             self.macgyver.coo_x = new_coo[0]
             self.macgyver.coo_y = new_coo[1]
-            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
+            self.new_coo = (self.macgyver.coo_x, self.macgyver.coo_y)
+            self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
         for obj in ["plastic_tube", "needle", "ether"]:
             if self.grid[new_coo] in obj:
                 self.is_picked_up = True
                 self.backpack_space.append(obj)
                 self.macgyver.coo_x = new_coo[0]
                 self.macgyver.coo_y = new_coo[1]
-                self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "chemin"
-            if new_coo == (self.guardian.coo_x, self.guardian.coo_y):
+                self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
+            if new_coo == [self.guardian.coo_x, self.guardian.coo_y]:
                 if self.macgyver.full_backpack is True:
                     self.macgyver.coo_x = new_coo[0]
                     self.macgyver.coo_y = new_coo[1]
