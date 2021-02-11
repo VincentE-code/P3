@@ -25,8 +25,8 @@ class Maze:
         self.guardian = None
         self.set_grid()
         self.position_items()
-        self.directional_keys("")
-        self.move_on_destination(self.new_coo)
+        # self.directional_keys()
+        # self.move_on_destination()
 
     def set_grid(self):
         """set_grid defined the maze."""
@@ -57,7 +57,6 @@ class Maze:
             if letter == "S":
                 self.grid[(count_x, count_y)] = "exit"
                 count_x = count_x + 1
-                self.guardian = Guardian(count_x, count_y)
             if letter == "\n":
                 print("line break")
                 count_x = 0
@@ -92,29 +91,30 @@ class Maze:
     def move_on_destination(self, new_coo):
         """move_on_destination move the player
         according to what he is on the destination."""
-        if new_coo in self.wall:
-            pass
-        if new_coo in self.floor:
+        print("new_coo : ", new_coo)
+        if self.grid[new_coo[1]] in self.wall:
+            print("Impossible move")
+        if self.grid[new_coo[1]] in self.floor:
             # remettre la case où était macgyver en "floor"
             self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
             # changer les coo de macgyver
-            self.macgyver.coo_x = new_coo[0]
-            self.macgyver.coo_y = new_coo[1]
-            self.new_coo = (self.macgyver.coo_x, self.macgyver.coo_y)
+            self.macgyver.coo_x = new_coo[1][0]
+            self.macgyver.coo_y = new_coo[1][1]
             self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
         for obj in ["plastic_tube", "needle", "ether"]:
-            if self.grid[new_coo] in obj:
-                self.is_picked_up = True
+            if self.grid[new_coo[1]] in obj:
                 self.backpack_space.append(obj)
-                self.macgyver.coo_x = new_coo[0]
-                self.macgyver.coo_y = new_coo[1]
+                self.macgyver.coo_x = new_coo[1][0]
+                self.macgyver.coo_y = new_coo[1][1]
                 self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
-            if new_coo == [self.guardian.coo_x, self.guardian.coo_y]:
-                if self.macgyver.full_backpack is True:
-                    self.macgyver.coo_x = new_coo[0]
-                    self.macgyver.coo_y = new_coo[1]
+                print("my objects : ", self.backpack_space)
+            if self.grid[new_coo[1]] in [self.guardian.coo_x, self.guardian.coo_y]:
+                if self.backpack_space == ["plastic_tube", "needle", "ether"]:
+                    self.macgyver.coo_x = new_coo[1][0]
+                    self.macgyver.coo_y = new_coo[1][1]
+                    self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
                     print("Bravo! Tu as gagné!")
-                elif self.macgyver.full_backpack is False:
+                else: 
                     print("game over! Tu as perdu")
 
 

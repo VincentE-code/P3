@@ -63,11 +63,14 @@ class Macgyvergame:
                         way_to_go = self.maze.directional_keys("d")
 
                     self.maze.move_on_destination(way_to_go)
-                    new_x = way_to_go[0] * taille_carre 
-                    new_y = way_to_go[1] * taille_carre
+                    new_x = way_to_go[1][0] * taille_carre
+                    new_y = way_to_go[1][1] * taille_carre
                     self.screen.blit(self.images["macgyver"], (new_x, new_y))
+                    old_coo_x = way_to_go[0][0] * taille_carre
+                    old_coo_y = way_to_go[0][1] * taille_carre
+                    self.screen.blit(self.images["floor"], (old_coo_x, old_coo_y))
 
-            pygame.display.flip()    
+            pygame.display.flip()
 
             # que l'évenement est la fermeture de fenêtre
             if event.type == pygame.QUIT:
