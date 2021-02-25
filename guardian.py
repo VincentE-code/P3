@@ -14,3 +14,4 @@ class Guardian:
 
     def get_tuple(self):
         return (self.coo_x, self.coo_y)
+

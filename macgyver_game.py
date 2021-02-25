@@ -19,14 +19,15 @@ class Macgyvergame:
         pygame.init()
         pygame.display.set_caption("Macgyver maze")
         self.screen = pygame.display.set_mode((300, 300))
-        self.images = {"wall": pygame.image.load("ressource/wall.png"),
-                       "macgyver": pygame.image.load("ressource/macgyver.png"),
-                       "floor": pygame.image.load("ressource/floor.png"),
-                       "exit": pygame.image.load("ressource/exit.png"),
-                       "guardian": pygame.image.load("ressource/guardian_image.png"),
-                       "plastic_tube": pygame.image.load("ressource/plastic_tube.png"),
-                       "ether": pygame.image.load("ressource/ether.png"),
-                       "needle": pygame.image.load("ressource/needle.png"),
+        self.images = {
+            "wall": pygame.image.load("ressource/wall.png"),
+            "macgyver": pygame.image.load("ressource/macgyver.png"),
+            "floor": pygame.image.load("ressource/floor.png"),
+            "exit": pygame.image.load("ressource/exit.png"),
+            "guardian": pygame.image.load("ressource/guardian_image.png"),
+            "plastic_tube": pygame.image.load("ressource/plastic_tube.png"),
+            "ether": pygame.image.load("ressource/ether.png"),
+            "needle": pygame.image.load("ressource/needle.png"),
         }
         self.game_settings()
         self.game_loop()
@@ -62,13 +63,13 @@ class Macgyvergame:
                     if event.key == pygame.K_DOWN:
                         way_to_go = self.maze.directional_keys("d")
 
-                    self.maze.move_on_destination(way_to_go)
-                    new_x = way_to_go[1][0] * taille_carre
-                    new_y = way_to_go[1][1] * taille_carre
-                    self.screen.blit(self.images["macgyver"], (new_x, new_y))
-                    old_coo_x = way_to_go[0][0] * taille_carre
-                    old_coo_y = way_to_go[0][1] * taille_carre
-                    self.screen.blit(self.images["floor"], (old_coo_x, old_coo_y))
+                    if self.maze.move_on_destination(way_to_go):
+                        new_x = way_to_go[1][0] * taille_carre
+                        new_y = way_to_go[1][1] * taille_carre
+                        self.screen.blit(self.images["macgyver"], (new_x, new_y))
+                        old_coo_x = way_to_go[0][0] * taille_carre
+                        old_coo_y = way_to_go[0][1] * taille_carre
+                        self.screen.blit(self.images["floor"], (old_coo_x, old_coo_y))
 
             pygame.display.flip()
 

@@ -40,16 +40,16 @@ class Maze:
             print(count_x, count_y)
             if letter == "M":
                 self.grid[(count_x, count_y)] = "wall"
-                count_x = count_x + 1
                 self.wall.append((count_x, count_y))
+                count_x = count_x + 1
             if letter == "A":
                 self.grid[(count_x, count_y)] = "macgyver"
-                count_x = count_x + 1
                 self.macgyver = Macgyver(count_x, count_y)
+                count_x = count_x + 1
             if letter == "B":
                 self.grid[(count_x, count_y)] = "guardian"
-                count_x = count_x + 1
                 self.guardian = Guardian(count_x, count_y)
+                count_x = count_x + 1
             if letter == "C":
                 self.grid[(count_x, count_y)] = "floor"
                 self.floor.append((count_x, count_y))
@@ -78,44 +78,54 @@ class Maze:
         according to the directional keys."""
         self.old_coo = (self.macgyver.coo_x, self.macgyver.coo_y)
         print(self.macgyver.coo_x, self.macgyver.coo_y)
+        x = self.macgyver.coo_x
+        y = self.macgyver.coo_y
         if move == "u":  # "u" = up
-            self.macgyver.coo_y -= 1
+            y = self.macgyver.coo_y - 1
         if move == "d":  # "d" = down
-            self.macgyver.coo_y += 1
+            y = self.macgyver.coo_y + 1
         if move == "r":  # "r" = right
-            self.macgyver.coo_x += 1
+            x = self.macgyver.coo_x + 1
         if move == "l":  # "l" = left
-            self.macgyver.coo_x -= 1
-        return [self.old_coo, (self.macgyver.coo_x, self.macgyver.coo_y)]
+            x = self.macgyver.coo_x - 1
+        return [self.old_coo, (x, y)]
 
     def move_on_destination(self, new_coo):
         """move_on_destination move the player
         according to what he is on the destination."""
         print("new_coo : ", new_coo)
-        if self.grid[new_coo[1]] in self.wall:
+        print(self.grid[new_coo[1]])
+        print("my objects : ", self.backpack_space)
+        print("------------------")
+        if self.grid[new_coo[1]] == "wall":
             print("Impossible move")
-        if self.grid[new_coo[1]] in self.floor:
+            return False
+        elif self.grid[new_coo[1]] == "floor":
             # remettre la case où était macgyver en "floor"
             self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
             # changer les coo de macgyver
             self.macgyver.coo_x = new_coo[1][0]
             self.macgyver.coo_y = new_coo[1][1]
             self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
-        for obj in ["plastic_tube", "needle", "ether"]:
-            if self.grid[new_coo[1]] in obj:
-                self.backpack_space.append(obj)
+            return True
+        elif self.grid[new_coo[1]] in ["plastic_tube", "needle", "ether"]:
+            self.backpack_space.append(self.grid[new_coo[1]])
+            self.macgyver.coo_x = new_coo[1][0]
+            self.macgyver.coo_y = new_coo[1][1]
+            self.grid[new_coo[0][0], new_coo[0][1]] = "floor"
+            print("my objects : ", self.backpack_space)
+            return True
+        elif self.grid[new_coo[1]] == "guardian":
+            if len(self.backpack_space) == 3:
                 self.macgyver.coo_x = new_coo[1][0]
                 self.macgyver.coo_y = new_coo[1][1]
                 self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
-                print("my objects : ", self.backpack_space)
-            if self.grid[new_coo[1]] in [self.guardian.coo_x, self.guardian.coo_y]:
-                if self.backpack_space == ["plastic_tube", "needle", "ether"]:
-                    self.macgyver.coo_x = new_coo[1][0]
-                    self.macgyver.coo_y = new_coo[1][1]
-                    self.grid[self.macgyver.coo_x, self.macgyver.coo_y] = "floor"
-                    print("Bravo! Tu as gagné!")
-                else: 
-                    print("game over! Tu as perdu")
+                print("Bravo! Tu as gagné!")
+                return True
+            else: 
+                print("game over! Tu as perdu")
+                return False
+        return False
 
 
 if __name__ == "__main__":
@@ -129,3 +139,4 @@ if __name__ == "__main__":
     print(MAZE_OBJECT.directional_keys("r"))
     # tester directional_keys à gauche
     print(MAZE_OBJECT.directional_keys("l"))
+
